@@ -19,12 +19,19 @@ function showPosition(position) {
 
 function gravarLocalizacao() {
     posicoes = getPosicoes()
-    posicao = {
-        id: setNovoId(),
-        data: getToday(),
-        latitude: lat,
-        longitude: long
+
+    if (lat == undefined || long == undefined) {
+        getLocation()
+        alert("Permita que a Geolocalização funcione e depois clique novamente em gravar a localização")
+    } else {
+        posicao = {
+            id: setNovoId(),
+            data: getToday(),
+            latitude: lat,
+            longitude: long
+        }
     }
+
     posicoes.push(posicao)
     posicoes = JSON.stringify(posicoes)
     localStorage.setItem("posicoes", posicoes)
@@ -39,7 +46,7 @@ function exibirLocalizacao() {
 function exibirLocalizaoNaTabela() {
     posicoes = getPosicoes()
     $(".exibir-localizacao-tabela").html("")
-    $.each(posicoes, function(index) {
+    $.each(posicoes, function (index) {
         $(".exibir-localizacao-tabela").append(
             `<tr>
                 <td>${converteDataParaPortugues(posicoes[index].data)}</td>
@@ -97,6 +104,6 @@ function setNovoId() {
     return localStorage.getItem("last_id")
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     exibirLocalizaoNaTabela()
 })
