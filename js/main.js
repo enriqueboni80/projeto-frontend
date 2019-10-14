@@ -62,6 +62,11 @@ function getToday() {
     return new Date(Date.now());
 }
 
+function limparTudo() {
+    localStorage.clear();
+    exibirLocalizaoNaTabela()
+}
+
 $(document).ready(function() {
     exibirLocalizaoNaTabela()
 })
