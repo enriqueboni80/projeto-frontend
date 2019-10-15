@@ -52,10 +52,16 @@ function exibirLocalizaoNaTabela() {
                 <td>${converteDataParaPortugues(posicoes[index].data)}</td>
                 <td>${posicoes[index].latitude}</td>
                 <td>${posicoes[index].longitude}</td>
-                <td><button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
+                <td>
+                <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
                 class="btn btn-danger btn-sm btn-delete-lancamento" alt="deletar Registro">
                 <i class="fas fa-eraser"></i>
-                </button ></td>
+                </button>
+                <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
+                class="btn btn-danger btn-sm btn-delete-lancamento" alt="deletar Registro">
+                <i class="fas fa-eraser"></i>
+                </button>
+                </td>
             </tr>`
         )
     })
