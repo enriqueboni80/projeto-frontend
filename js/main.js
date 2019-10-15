@@ -55,8 +55,8 @@ function exibirLocalizaoNaTabela() {
                 <td>${posicoes[index].longitude}</td>
                 <td>
                 <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
-                class="btn btn-danger btn-sm btn-delete-lancamento" alt="deletar Registro">
-                <i class="fas fa-eraser"></i>
+                class="btn btn-info btn-sm btn-delete-lancamento" alt="deletar Registro">
+                <i class="fas fa-globe-americas"></i>
                 </button>
                 <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
                 class="btn btn-danger btn-sm btn-delete-lancamento" alt="deletar Registro">
@@ -88,9 +88,11 @@ function limparTudo() {
 function converteDataParaPortugues(data) {
     let dataString
     let dia
+    let hora
     dataString = data.split("-")
     dia = dataString[2].split("T")[0]
-    return dia + '/' + dataString[1] + '/' + dataString[0]
+    hora = dataString[2].split("T")[1].split(".")[0]
+    return dia + '/' + dataString[1] + '/' + dataString[0] + "</br>" + hora
 }
 
 function deletarRegistro(numeroRegistro) {
