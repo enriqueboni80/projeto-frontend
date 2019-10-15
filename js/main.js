@@ -1,4 +1,5 @@
-var x = document.getElementById("demo");
+//var x = document.getElementsByClassName();
+x = $(".content__exibir-localizacao-tela");
 var lat
 var long
 var posicoes = []
@@ -7,7 +8,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        x.html("Geolocation is not supported by this browser.");
     }
 }
 
@@ -39,8 +40,8 @@ function gravarLocalizacao() {
 }
 
 function exibirLocalizacao() {
-    x.innerHTML = "Latitude: " + lat +
-        "<br>Longitude: " + long;
+    x.html("<b>Latitude:</b> " + lat +
+        "<br><b>Longitude:</b> " + long);
 }
 
 function exibirLocalizaoNaTabela() {
