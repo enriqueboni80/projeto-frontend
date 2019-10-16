@@ -47,7 +47,7 @@ function exibirLocalizacao() {
 function exibirLocalizaoNaTabela() {
     posicoes = getPosicoes()
     $(".exibir-localizacao-tabela").html("")
-    $.each(posicoes, function (index) {
+    $.each(posicoes, function(index) {
         $(".exibir-localizacao-tabela").append(
             `<tr>
                 <td>${converteDataParaPortugues(posicoes[index].data)}</td>
@@ -97,7 +97,7 @@ function converteDataParaPortugues(data) {
 
 function deletarRegistro(numeroRegistro) {
     posicoes = getPosicoes()
-    $.each(posicoes, function (index) {
+    $.each(posicoes, function(index) {
         if (this.id == numeroRegistro) {
             posicoes.splice(index, 1)
             localStorage.setItem('posicoes', JSON.stringify(posicoes))
@@ -113,6 +113,17 @@ function setNovoId() {
     return localStorage.getItem("last_id")
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     exibirLocalizaoNaTabela()
 })
+
+
+function redirecionarPagina(pagina) {
+    $.ajax({
+            url: `${pagina}.html`,
+            cache: false
+        })
+        .done(function(retornoRequestPagina) {
+            $(".content").html(retornoRequestPagina);
+        });
+}
