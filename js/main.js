@@ -54,12 +54,12 @@ function exibirLocalizaoNaTabela() {
                 <td>${posicoes[index].latitude}</td>
                 <td>${posicoes[index].longitude}</td>
                 <td>
-                <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
-                class="btn btn-info btn-sm btn-delete-lancamento" alt="deletar Registro">
+                <button onclick="verLocalizacaoMapa(${posicoes[index].id})" type="button" 
+                class="btn btn-info btn-sm" alt="deletar Registro">
                 <i class="fas fa-globe-americas"></i>
                 </button>
                 <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
-                class="btn btn-danger btn-sm btn-delete-lancamento" alt="deletar Registro">
+                class="btn btn-danger btn-sm" alt="deletar Registro">
                 <i class="fas fa-eraser"></i>
                 </button>
                 </td>
@@ -113,6 +113,10 @@ function setNovoId() {
     return localStorage.getItem("last_id")
 }
 
+function verLocalizacaoMapa(numeroRegistro) {
+    redirecionarPagina('localizacao')
+}
+
 $(document).ready(function() {
     exibirLocalizaoNaTabela()
 })
@@ -120,7 +124,8 @@ $(document).ready(function() {
 
 function redirecionarPagina(pagina) {
     $.ajax({
-            url: `${pagina}.html`,
+            url: `paginas/${pagina}.html`,
+            data: { "expression": "Enrique Teste" },
             cache: false
         })
         .done(function(retornoRequestPagina) {
