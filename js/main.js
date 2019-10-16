@@ -1,21 +1,22 @@
-//var x = document.getElementsByClassName();
-x = $(".content__exibir-localizacao-tela");
-var lat
-var long
-var posicoes = []
+let lat
+let long
+let element
+let elementX = $(".content__exibir-localizacao-tela")
+let elementXModal = $(".content__exibir-localizacao-tela-modal")
+let posicoes = []
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        x.html("Geolocation is not supported by this browser.");
+        elementX.html("Geolocation is not supported by this browser.");
     }
 }
 
 function showPosition(position) {
     lat = position.coords.latitude
     long = position.coords.longitude
-    exibirLocalizacao()
+    exibirLocalizacao(lat, long)
 }
 
 function gravarLocalizacao() {
@@ -39,23 +40,28 @@ function gravarLocalizacao() {
     exibirLocalizaoNaTabela()
 }
 
-function exibirLocalizacao() {
-    x.html("<b>Latitude:</b> " + lat +
+function exibirLocalizacao(lat, long, modal = false) {    
+    element = (modal) ? elementXModal : elementX
+    element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
 }
 
 function exibirLocalizaoNaTabela() {
     posicoes = getPosicoes()
     $(".exibir-localizacao-tabela").html("")
-    $.each(posicoes, function(index) {
+    $.each(posicoes, function (index) {
+        lat = posicoes[index].latitude
+        long = posicoes[index].longitude
+        
         $(".exibir-localizacao-tabela").append(
             `<tr>
                 <td>${converteDataParaPortugues(posicoes[index].data)}</td>
-                <td>${posicoes[index].latitude}</td>
-                <td>${posicoes[index].longitude}</td>
+                <td>${lat}</td>
+                <td>${long}</td>
                 <td>
-                <button onclick="verLocalizacaoMapa(${posicoes[index].id})" type="button" 
-                class="btn btn-info btn-sm" alt="deletar Registro">
+                <button onclick="exibirLocalizacao(${lat},${long},${true})" type="button" 
+                class="btn btn-info btn-sm" alt=""
+                data-toggle="modal" data-target="#modalMapa">
                 <i class="fas fa-globe-americas"></i>
                 </button>
                 <button onclick="deletarRegistro(${posicoes[index].id})" type="button" 
@@ -97,7 +103,7 @@ function converteDataParaPortugues(data) {
 
 function deletarRegistro(numeroRegistro) {
     posicoes = getPosicoes()
-    $.each(posicoes, function(index) {
+    $.each(posicoes, function (index) {
         if (this.id == numeroRegistro) {
             posicoes.splice(index, 1)
             localStorage.setItem('posicoes', JSON.stringify(posicoes))
@@ -113,22 +119,18 @@ function setNovoId() {
     return localStorage.getItem("last_id")
 }
 
-function verLocalizacaoMapa(numeroRegistro) {
-    redirecionarPagina('localizacao')
-}
-
-$(document).ready(function() {
+$(document).ready(function () {
     exibirLocalizaoNaTabela()
 })
 
 
 function redirecionarPagina(pagina) {
     $.ajax({
-            url: `paginas/${pagina}.html`,
-            data: { "expression": "Enrique Teste" },
-            cache: false
-        })
-        .done(function(retornoRequestPagina) {
+        url: `paginas/${pagina}.html`,
+        data: { "expression": "Enrique Teste" },
+        cache: false
+    })
+        .done(function (retornoRequestPagina) {
             $(".content").html(retornoRequestPagina);
         });
 }
