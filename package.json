@@ -1,23 +1,23 @@
 {
-  "name": "projeto-frontend",
-  "version": "1.0.0",
-  "description": "Projeto Front-end",
-  "main": "index.js",
-  "directories": {
-    "doc": "doc"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "sass ./scss/main.scss ./css/main.css && http-server ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/enriqueboni80/projeto-frontend.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/enriqueboni80/projeto-frontend/issues"
-  },
-  "homepage": "https://github.com/enriqueboni80/projeto-frontend#readme"
+    "name": "projeto-frontend",
+    "version": "1.0.0",
+    "description": "Projeto Front-end",
+    "main": "index.js",
+    "directories": {
+        "doc": "doc"
+    },
+    "scripts": {
+        "test": "sass --watch ./scss/main.scss ./css/main.css | http-server .",
+        "start": "sass ./scss/main.scss ./css/main.css && http-server ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/enriqueboni80/projeto-frontend.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/enriqueboni80/projeto-frontend/issues"
+    },
+    "homepage": "https://github.com/enriqueboni80/projeto-frontend#readme"
 }
