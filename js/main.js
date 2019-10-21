@@ -5,6 +5,45 @@ let elementX = $(".content__exibir-localizacao-tela")
 let elementXModal = $(".content__exibir-localizacao-tela-modal")
 let posicoes = []
 
+
+const getToday = () => new Date(Date.now())
+
+const getPosicoes = () => {
+    posicoes = JSON.parse(localStorage.getItem("posicoes"))
+    return (posicoes == null) ? [] : posicoes
+}
+
+const setPosicao = () => {
+    return posicao = {
+        id: setNovoId(),
+        data: getToday(),
+        latitude: lat,
+        longitude: long
+    }
+}
+
+const limparTudo = () => {
+    localStorage.clear();
+    exibirLocalizaoNaTabela()
+}
+
+const setNovoId = () => {
+    novoID = localStorage.getItem("last_id")
+    novoID++
+    localStorage.setItem("last_id", novoID)
+    return localStorage.getItem("last_id")
+}
+
+const converteDataParaPortugues = (data) => {
+    let dataString
+    let dia
+    let hora
+    dataString = data.split("-")
+    dia = dataString[2].split("T")[0]
+    hora = dataString[2].split("T")[1].split(".")[0]
+    return dia + '/' + dataString[1] + '/' + dataString[0] + "</br>" + hora
+}
+
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -19,6 +58,17 @@ function showPosition(position) {
     exibirLocalizacao(lat, long)
 }
 
+const redirecionarPagina = (pagina) => {
+    $.ajax({
+            url: `paginas/${pagina}.html`,
+            data: { "expression": "Enrique Teste" },
+            cache: false
+        })
+        .done(function(retornoRequestPagina) {
+            $(".content").html(retornoRequestPagina);
+        });
+}
+
 function gravarLocalizacao() {
     posicoes = getPosicoes()
 
@@ -26,12 +76,7 @@ function gravarLocalizacao() {
         getLocation()
         alert("Permita que a Geolocalização funcione e depois clique novamente em gravar a localização")
     } else {
-        posicao = {
-            id: setNovoId(),
-            data: getToday(),
-            latitude: lat,
-            longitude: long
-        }
+        posicao = setPosicao()
     }
 
     posicoes.push(posicao)
@@ -40,7 +85,7 @@ function gravarLocalizacao() {
     exibirLocalizaoNaTabela()
 }
 
-function exibirLocalizacao(lat, long, modal = false) {    
+function exibirLocalizacao(lat, long, modal = false) {
     element = (modal) ? elementXModal : elementX
     element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
@@ -49,10 +94,10 @@ function exibirLocalizacao(lat, long, modal = false) {
 function exibirLocalizaoNaTabela() {
     posicoes = getPosicoes()
     $(".exibir-localizacao-tabela").html("")
-    $.each(posicoes, function (index) {
+    $.each(posicoes, function(index) {
         lat = posicoes[index].latitude
         long = posicoes[index].longitude
-        
+
         $(".exibir-localizacao-tabela").append(
             `<tr>
                 <td>${converteDataParaPortugues(posicoes[index].data)}</td>
@@ -74,36 +119,9 @@ function exibirLocalizaoNaTabela() {
     })
 }
 
-function getPosicoes() {
-    posicoes = JSON.parse(localStorage.getItem("posicoes"))
-    if (posicoes == null) {
-        return posicoes = []
-    }
-    return posicoes
-}
-
-function getToday() {
-    return new Date(Date.now());
-}
-
-function limparTudo() {
-    localStorage.clear();
-    exibirLocalizaoNaTabela()
-}
-
-function converteDataParaPortugues(data) {
-    let dataString
-    let dia
-    let hora
-    dataString = data.split("-")
-    dia = dataString[2].split("T")[0]
-    hora = dataString[2].split("T")[1].split(".")[0]
-    return dia + '/' + dataString[1] + '/' + dataString[0] + "</br>" + hora
-}
-
 function deletarRegistro(numeroRegistro) {
     posicoes = getPosicoes()
-    $.each(posicoes, function (index) {
+    $.each(posicoes, function(index) {
         if (this.id == numeroRegistro) {
             posicoes.splice(index, 1)
             localStorage.setItem('posicoes', JSON.stringify(posicoes))
@@ -112,25 +130,6 @@ function deletarRegistro(numeroRegistro) {
     exibirLocalizaoNaTabela()
 }
 
-function setNovoId() {
-    novoID = localStorage.getItem("last_id")
-    novoID++
-    localStorage.setItem("last_id", novoID)
-    return localStorage.getItem("last_id")
-}
-
-$(document).ready(function () {
+$(document).ready(function() {
     exibirLocalizaoNaTabela()
 })
-
-
-function redirecionarPagina(pagina) {
-    $.ajax({
-        url: `paginas/${pagina}.html`,
-        data: { "expression": "Enrique Teste" },
-        cache: false
-    })
-        .done(function (retornoRequestPagina) {
-            $(".content").html(retornoRequestPagina);
-        });
-}
