@@ -6,7 +6,11 @@ let elementXModal = $(".content__exibir-localizacao-tela-modal")
 let posicoes = []
 
 
-const getToday = () => new Date(Date.now())
+const getToday = () => {
+    let dateUS = new Date(Date.now())
+    let dateBR = new Date(dateUS.getTime() - dateUS.getTimezoneOffset() * 60000)
+    return dateBR
+}
 
 const getPosicoes = () => {
     posicoes = JSON.parse(localStorage.getItem("posicoes"))
