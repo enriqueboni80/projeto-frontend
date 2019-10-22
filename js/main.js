@@ -93,6 +93,8 @@ function exibirLocalizacao(lat, long, modal = false) {
     element = (modal) ? elementXModal : elementX
     element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
+    initMap(lat, long)
+
 }
 
 function exibirLocalizaoNaTabela() {
@@ -136,17 +138,19 @@ function deletarRegistro(numeroRegistro) {
 
 $(document).ready(function() {
     exibirLocalizaoNaTabela()
-    initMap()
 })
 
 
-
-
-
-function initMap() {
-    var map;
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
+function initMap(latitude, longitude) {
+    var myLatlng = new google.maps.LatLng(latitude, longitude);
+    var mapOptions = {
+        zoom: 15,
+        center: myLatlng
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        title: "Google Maps"
     });
+    marker.setMap(map);
 }
