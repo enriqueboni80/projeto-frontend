@@ -93,7 +93,7 @@ function exibirLocalizacao(lat, long, modal = false) {
     element = (modal) ? elementXModal : elementX
     element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
-    initMap(lat, long)
+    //initMap(lat, long)
 
 }
 
