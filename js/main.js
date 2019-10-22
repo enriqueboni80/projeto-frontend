@@ -31,6 +31,10 @@ const limparTudo = () => {
     exibirLocalizaoNaTabela()
 }
 
+const limparExibirLocalizacaoHome = () => {
+    elementX.html(" ")
+}
+
 const setNovoId = () => {
     novoID = localStorage.getItem("last_id")
     novoID++
@@ -75,17 +79,14 @@ const redirecionarPagina = (pagina) => {
 
 function gravarLocalizacao() {
     posicoes = getPosicoes()
-
     if (lat == undefined || long == undefined) {
-        getLocation()
-        alert("Permita que a Geolocalização funcione e depois clique novamente em gravar a localização")
-    } else {
-        posicao = setPosicao()
+        alert("Permita que a Geolocalização funcione para gravar sua localização")
     }
-
+    posicao = setPosicao()
     posicoes.push(posicao)
     posicoes = JSON.stringify(posicoes)
     localStorage.setItem("posicoes", posicoes)
+    limparExibirLocalizacaoHome()
     exibirLocalizaoNaTabela()
 }
 
@@ -137,6 +138,8 @@ function deletarRegistro(numeroRegistro) {
 }
 
 $(document).ready(function() {
+    getLocation()
+    limparExibirLocalizacaoHome()
     exibirLocalizaoNaTabela()
 })
 
