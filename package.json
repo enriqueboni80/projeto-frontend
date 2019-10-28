@@ -7,8 +7,8 @@
         "doc": "doc"
     },
     "scripts": {
-        "test": "sass --watch ./scss/main.scss ./css/main.css | http-server .",
-        "start": "sass ./scss/main.scss ./css/main.css && http-server ."
+        "test": "sass --watch ./src/scss/main.scss ./dist/css/main.css | http-server .",
+        "start": "sass ./src/scss/main.scss ./dist/css/main.css && http-server ."
     },
     "repository": {
         "type": "git",
