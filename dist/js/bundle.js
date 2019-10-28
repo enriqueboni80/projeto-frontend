@@ -74,9 +74,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.getLocation = getLocation;
-exports.showPosition = showPosition;
 exports.gravarLocalizacao = gravarLocalizacao;
-exports.exibirLocalizacao = exibirLocalizacao;
+exports.deletarRegistro = deletarRegistro;
 var lat = void 0;
 var long = void 0;
 var element = void 0;
@@ -114,7 +113,7 @@ var limparExibirLocalizacaoHome = function limparExibirLocalizacaoHome() {
     elementX.html(" ");
 };
 
-var setNovoId = exports.setNovoId = function setNovoId() {
+var setNovoId = function setNovoId() {
     var novoID = localStorage.getItem("last_id");
     novoID++;
     localStorage.setItem("last_id", novoID);

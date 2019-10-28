@@ -35,7 +35,7 @@ const limparExibirLocalizacaoHome = () => {
     elementX.html(" ")
 }
 
-export const setNovoId = () => {
+const setNovoId = () => {
     let novoID = localStorage.getItem("last_id")
     novoID++
     localStorage.setItem("last_id", novoID)
@@ -60,7 +60,7 @@ export function getLocation() {
     }
 }
 
-export function showPosition(position) {
+function showPosition(position) {
     lat = position.coords.latitude
     long = position.coords.longitude
     exibirLocalizacao(lat, long)
@@ -90,7 +90,7 @@ export function gravarLocalizacao() {
     exibirLocalizaoNaTabela()
 }
 
-export function exibirLocalizacao(lat, long, modal = false) {
+function exibirLocalizacao(lat, long, modal = false) {
     element = (modal) ? elementXModal : elementX
     element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
@@ -126,7 +126,7 @@ function exibirLocalizaoNaTabela() {
     })
 }
 
-function deletarRegistro(numeroRegistro) {
+export function deletarRegistro(numeroRegistro) {
     posicoes = getPosicoes()
     $.each(posicoes, function (index) {
         if (this.id == numeroRegistro) {

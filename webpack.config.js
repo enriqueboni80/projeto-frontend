@@ -1,11 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: path.join(__dirname, './src/js/main.jsx'),
+    entry: path.join(__dirname, './src/js/index.jsx'),
     output: {
         path: path.join(__dirname, './dist/js'),
         libraryTarget: 'window',
-        filename: 'main.js'
+        filename: 'bundle.js'
     },
     resolve: {
         extensions: [".js", ".jsx"]
@@ -17,7 +18,7 @@ module.exports = {
         rules: [{
                 test: /.jsx?$/,
                 exclude: /node_modules/,
-                include: path.join(__dirname, 'src'),
+                include: path.join(__dirname, './src/js'),
                 use: [{
                     loader: 'babel-loader',
                     options: {
@@ -43,7 +44,7 @@ module.exports = {
     },
     devServer: {
         publicPath: "/",
-        contentBase: "./dist"
+        contentBase: "./"
     },
     plugins: [
 
