@@ -64,8 +64,6 @@ module.exports = {
         //   template: path.join(__dirname, 'index.html')
         //}),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // all options are optional
             filename: '[name].css',
             chunkFilename: '[id].css',
             ignoreOrder: false, // Enable to remove warnings about conflicting order
