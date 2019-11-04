@@ -8,7 +8,7 @@
     },
     "scripts": {
         "build": "sass --watch ./src/scss/main.scss ./dist/css/main.css | webpack | webpack-dev-server",
-        "start": "webpack"
+        "start": "sass ./src/scss/main.scss ./dist/css/main.css | webpack"
     },
     "repository": {
         "type": "git",
