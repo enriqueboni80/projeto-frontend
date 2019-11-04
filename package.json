@@ -7,8 +7,8 @@
         "doc": "doc"
     },
     "scripts": {
-        "build": "sass ./src/scss/main.scss ./dist/css/main.css && webpack",
-        "start": "sass ./src/scss/main.scss ./dist/css/main.css && webpack-dev-server"
+        "build": "sass --watch ./src/scss/main.scss ./dist/css/main.css | webpack | webpack-dev-server",
+        "start": "webpack"
     },
     "repository": {
         "type": "git",

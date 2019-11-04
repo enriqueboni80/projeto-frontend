@@ -90,7 +90,7 @@ export function gravarLocalizacao() {
     exibirLocalizaoNaTabela()
 }
 
-function exibirLocalizacao(lat, long, modal = false) {
+export function exibirLocalizacao(lat, long, modal = false) {
     element = (modal) ? elementXModal : elementX
     element.html("<b>Latitude:</b> " + lat +
         "<br><b>Longitude:</b> " + long);
