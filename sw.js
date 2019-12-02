@@ -15,7 +15,9 @@ self.addEventListener('install', e => {
                     `/dist/images/backgrounds/background.jpg`,
                     `/dist/webfonts/fa-solid-900.woff2`,
                     `/dist/webfonts/fa-solid-900.woff`,
-                    `/dist/webfonts/fa-solid-900.ttf`
+                    `/dist/webfonts/fa-solid-900.ttf`,
+                    `/site.webmanifest`,
+                    `/favicon.ico`
                 ])
                 .then(() => self.skipWaiting());
         })
