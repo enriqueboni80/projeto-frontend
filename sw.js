@@ -1,4 +1,4 @@
-const cacheName = "teste";
+const cacheName = "pwa-cache";
 
 self.addEventListener('install', e => {
     e.waitUntil(
@@ -17,7 +17,8 @@ self.addEventListener('install', e => {
                     `/dist/webfonts/fa-solid-900.woff`,
                     `/dist/webfonts/fa-solid-900.ttf`,
                     `/site.webmanifest`,
-                    `/favicon.ico`
+                    `/favicon.ico`,
+                    `/icon.png`
                 ])
                 .then(() => self.skipWaiting());
         })
