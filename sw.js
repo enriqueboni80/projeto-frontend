@@ -1,4 +1,4 @@
-const cacheName = "pwa-cache";
+const cacheName = "pwa-cache_2019120301";
 
 self.addEventListener('install', e => {
     e.waitUntil(
